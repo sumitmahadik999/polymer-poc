@@ -1,0 +1,43 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="electoral-candidate.html">
+
+<dom-module id="vote-india">
+<style>
+</style>
+
+<template>
+	<div class="election-container">
+	<div class="elction-header">India's General Elections</div>
+	<ul>
+	<template is="dom-repeat" items="[[candidates]]">
+	<li>
+	<electoral-candidate candidate-details="{{item}}"></electoral-candidate>
+	</li>
+	</template>
+	</ul>
+	</div>
+</template>
+</dom-module>
+
+<script>
+	Polymer({
+		is: "vote-india",
+		ready: function() {
+			this.candidates = [
+				{
+					name: "Narendra Modi",
+					image: "https://lh6.googleusercontent.com/-zL2hGAaDwmU/AAAAAAAAAAI/AAAAAAADKzY/OcIomoIaS6Q/photo.jpg",
+					voteCount: 0,
+					party: "BJP"
+				},
+				{
+					name: "Rahul Gandhi",
+					image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Rahul_Gandhi_1.jpg",
+					voteCount: 0,
+					party: "Congress"
+				}
+
+			]
+		}
+	})
+</script>

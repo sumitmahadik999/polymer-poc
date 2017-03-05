@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="electoral-candidate">
+<style></style>
+
+<template>
+	<div class="candidate-container">
+	<img src="{{candidateDetails.image}}" alt="{{candidateDetails.name}}" />
+	<p>{{candidateDetails.name}}</p>
+	<span>Party: {{candidateDetails.party}}</span>
+	<span>Total Votes: {{candidateDetails.voteCount}}</span>
+	<button on-tap="addVote" data-args="{{candidateDetails}}">Click To Vote</button>
+	</div>
+</template>
+</dom-module>
+
+<script>
+Polymer({
+	is: "electoral-candidate",
+	candidateDetails : {
+		type: Object,
+		notify: true
+
+	},
+	addVote: function(e) {
+		var count = this.candidateDetails.voteCount + 1;
+		this.set("candidateDetails.voteCount", count)
+		console.log(this.candidateDetails, count)
+		//this.candidateDetails.voteCount++;
+		//this.notifyPath("this.candidateDetails.voteCount")
+	}
+
+})
+</script>

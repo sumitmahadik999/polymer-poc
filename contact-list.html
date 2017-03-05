@@ -1,0 +1,142 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="contact-list">
+<style>
+	ul {
+		list-style: none;
+	}
+	li {
+		display: flex;
+		padding: 15px;
+		border-bottom: 1px solid #dedede;
+	}
+	li img {
+		border-radius: 50%;
+	}
+	h2,p,span {
+		line-height: 80px;
+		margin: 0 15px;
+	}
+	.delete-button {
+		height: 30px;
+	    background: dodgerblue;
+	    border: 1px solid #1f72d6;
+	    color: #fff;
+	    border-radius: 4px;
+	    margin-top: 25px;
+	    padding: 0px 15px;
+	}
+	.addContact div {
+		padding:10px 20px;
+	}
+	.addContact div label {
+		width: 80px;
+		display: inline-block;
+	}
+	.add-button {
+		height: 30px;
+	    background: #71bd49;
+	    border: 1px solid #609c41;
+	    color: #fff;
+	    border-radius: 4px;
+	    margin-top: 25px;
+	    padding: 0px 15px;
+	    margin-left: 20px;
+	}
+
+
+</style>
+<template>
+<div class="addContact">
+<div><label> Name : </label> <input type="text" value="{{name::input}}"></div>
+<div><label> Phone : </label> <input type="text" value="{{phone::input}}"></div>
+<div><label> Email : </label> <input type="text" value="{{email::input}}"></div>
+<div><label> Image : </label> <input type="text" value="{{image::input}}"></div>
+<button class="add-button" on-tap="addContact">Add Contact</button>
+</div>
+	<ul>
+	<template is="dom-repeat" items="[[contacts]]">
+	<li>
+		<img src="{{item.img}}" alt="{{item.name}}">
+		<h2>{{item.name}}</h2>
+		<p>{{item.phone}}</p>
+		<span>{{item.email}}</span>
+		<button class="delete-button" on-tap="deleteContact">Delete Contact</button>
+	</li>
+	</template>
+	</ul>
+</template>
+</dom-module>
+
+<script>
+Polymer({
+	is: "contact-list",
+	name: {
+		type: String
+	},
+	phone: {
+		type: String
+	},
+	email: {
+		type: String
+	},
+	image: {
+		type: String
+	},
+	ready: function() {
+		this.contacts = [
+			{
+				name: "Sansa",
+				phone: "9865431554",
+				email: "sansa@got.com",
+				img: "https://randomuser.me/api/portraits/women/9.jpg"
+			},
+			{
+				name: "Aarya",
+				phone: "9865438616",
+				email: "aarya@got.com",
+				img: "https://randomuser.me/api/portraits/women/3.jpg"
+			},
+			{
+				name: "Cersie",
+				phone: "9865431554",
+				email: "cersie@got.com",
+				img: "https://randomuser.me/api/portraits/women/17.jpg"
+			},
+			{
+				name: "Cathaleyn",
+				phone: "9865431554",
+				email: "cathaleyn@got.com",
+				img: "https://randomuser.me/api/portraits/women/19.jpg"
+			},
+			{
+				name: "Danerys",
+				phone: "9865431554",
+				email: "danerys@got.com",
+				img: "https://randomuser.me/api/portraits/women/29.jpg"
+			},
+			{
+				name: "Briane",
+				phone: "9865431554",
+				email: "briane@got.com",
+				img: "https://randomuser.me/api/portraits/women/21.jpg"
+			}
+		]
+	},
+	addContact : function() {
+		var newContact = {
+			name : this.name,
+			email: this.email,
+			phone: this.phone,
+			img: this.image
+		}
+		this.push("contacts",newContact);
+		console.log(this.contacts)
+	},
+	deleteContact: function(e) {
+		var index = e.model.__data__.index;
+		console.log(e.model.__data__.index)
+		this.splice('contacts', index, 1);
+	},
+});
+	</script>
